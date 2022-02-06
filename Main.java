@@ -6,6 +6,11 @@
  *  The purpose of this assignment is to demonstrate our understanding of polymorphism, encapsulation
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
+
+/*
+ *  Things changed: Added abstract methods for objects so we can use them in this class and 
+ *  Call them.
+ */
  
 import java.util.Scanner;
 
@@ -17,9 +22,9 @@ public class Main extends Currency{
 	// Array of Two Currency References
 	Currency[] currencyObjects = {dollar,pound};
 	// Boolean to help with do while loop
-    boolean isOn = true;
-    // double for our error handling
-    double value = 0.00;
+        boolean isOn = true;
+        // double for our error handling
+        double value = 0.00;
 	// Our main method
 	public static void main(String[] args) {
 		Main max = new Main();
@@ -52,11 +57,11 @@ public class Main extends Currency{
 	    // checks for input
 		if (ops.equals("a")) {
 			if (type.equals("d") && typecheck.equals("dollar")) {
-				Dollar temp = new Dollar(value);
-				currencyObjects[0] = dollar.add((Dollar)currencyObjects[0], temp); 
-				((Dollar)currencyObjects[0]).print(); 
-				((Pound)currencyObjects[1]).print();
-				System.out.println("What would you like to do next? if not type q for letter spaces and 0.00 for currency followed by q");
+			Dollar temp = new Dollar(value);
+			currencyObjects[0] = dollar.add((Dollar)currencyObjects[0], temp); 
+			((Dollar)currencyObjects[0]).print(); 
+			((Pound)currencyObjects[1]).print();
+			System.out.println("What would you like to do next? if not type q for letter spaces and 0.00 for currency followed by q");
 			}
 			
 			else if (type.equals("p") && typecheck.equals("pound")) {
@@ -100,6 +105,24 @@ public class Main extends Currency{
 		}while(isOn == true);
 			return;
  }
+	@Override
+	protected lab2.Currency Currency(lab2.Currency x) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected lab2.Currency Pound(lab2.Currency a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected lab2.Currency Dollar(lab2.Currency a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
 }
 
 // Types of exceptions we need
