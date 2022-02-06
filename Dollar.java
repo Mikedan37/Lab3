@@ -8,6 +8,11 @@
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
 
+/*
+ *  Things that were changed: Add, Subtract, IsGreater, IsEqual, method was removed an only in Currency class, 
+ *  Creatend empty abstract Methods
+ */
+
 public class Dollar extends Currency {
 // Non public String Attribute which contains name of Dollar 
 private String type = "Dollar";
