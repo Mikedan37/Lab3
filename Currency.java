@@ -8,6 +8,12 @@
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
 
+/*
+ *  Things changed: add,subtract methods improved and added if statements to check if dollar
+ *  and pound methods are the same when addding so no type mismatching. Also made empty abstract
+ *  to allow dollar and pound to be used and moved around
+ */
+
 abstract class Currency {
 	// Two Integer attributes
 	private int unit, fraction;
@@ -64,8 +70,16 @@ abstract class Currency {
 	 * Post: returns the object once two objects are added together (Look for more info at Dollar/Pound child classes)
 	 */
 	
-	public Currency add(Currency x, Currency y) {
-		return x;
+	public Currency add(Currency a, Currency b) {
+	    if(Dollar(a) == a && Dollar(b) == b) {
+	    Currency x = new Dollar(((a.getUnit()+b.getUnit())*100+a.getFraction()+b.getFraction())/100.0);
+	    return x;
+	    }else if(Pound(a) == a && Pound(b) == b){
+	    Currency x = new Pound(((a.getUnit()+b.getUnit())*100+a.getFraction()+b.getFraction())/100.0);
+	    return x;
+	    }else {
+	    return Currency(a);
+	    }
 	}
 	
 	/*
@@ -74,8 +88,20 @@ abstract class Currency {
 	 * Post: returns the object once two objects are subtracted together (Look for more info at Dollar/Pound child classes)
 	 */
 	
-	public Currency subtract(Currency x, Currency y) {
-		return x;
+	public Currency subtract(Currency a, Currency b) {
+	     double one = a.getUnit()+(double)a.getFraction()/100;
+	     double two = b.getUnit()+(double)b.getFraction()/100;
+	     if (one>=two) {
+	     if(Currency(a) == Dollar(a) && Currency(b) == Dollar(b)) {
+	     Currency x = new Dollar(one-two);
+	     return x;
+	     }
+	     if(Currency(a) == Pound(a) && Currency(a) == Pound(b)) {
+	     Currency x = new Pound(one-two);
+	     }
+	   }
+	 System.out.println("You cannot be negative!");
+	 return Currency(a);
 	}
 	
 	/*
@@ -93,8 +119,8 @@ abstract class Currency {
 	 */
 	
 	public boolean isEqual(Currency x, Currency y){
-		if (x.getUnit() == y.getUnit() && x.getFraction() == y.getFraction()) {
-			return true;
+	    if (x.getUnit() == y.getUnit() && x.getFraction() == y.getFraction()) {
+		return true;
 		}
 		return false;
 	}
@@ -113,21 +139,28 @@ abstract class Currency {
 	 * 
 	 */
 	
-    public boolean isGreater(Currency x, Currency y){
-    	if (x.getUnit() > y.getUnit() || x.getUnit() >= y.getUnit() && x.getFraction() > y.getFraction()) {
-			return true;
+         public boolean isGreater(Currency x, Currency y){
+    	 if (x.getUnit() > y.getUnit() || x.getUnit() >= y.getUnit() && x.getFraction() > y.getFraction()) {
+		return true;
 		}
 		return false;
 	}
     
-    /*
-     * The purpose of this method is to print out the name and value of the currency
-     * Pre: No input
-     * Post: see in child classes
-     */
+         /*
+          * The purpose of this method is to print out the name and value of the currency
+          * Pre: No input
+          * Post: see in child classes
+          */
     
     public void print(){
     	
     }
-	// All above must be instance methods and not static
+	
+    // empty abstract methods to allow dollar and currency objects to interact with currency parent class
+    protected abstract Currency Currency(Currency a);
+
+    protected abstract Currency Pound(Currency a);
+
+    protected abstract Currency Dollar(Currency a);
+    // All above must be instance methods and not static
 }
