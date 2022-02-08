@@ -124,6 +124,8 @@ public class Main extends Currency{
 	}
 }
 }
+//Make currency take one object, dont have a + b in add method, dont have a copy object, add on object return void and on parameter currency. No point in creating method that makes new object, extra work on add check if a and b move from main to add to check type(becasue of currency declare one abstract method. Getter. ABstract public string get name; print all in currency class not dollar and pound. Java lets you take passed object b.get class super.get class. (verify they are the same). first does things together makes base class abstract. properly overridden for children class and second options work. 3 and 4 make object check if second and ffourth object match operation a p obj xxx call array 0.operation if type xxx meets type 0;
+//slides have exactly data = object(Currency reference) node reference to next node think of all students in same line, and poiint to person to right theres the node.
 
 // Types of exceptions we need
 // Array Out of Bounds
