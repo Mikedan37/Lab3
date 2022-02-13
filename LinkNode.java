@@ -1,4 +1,3 @@
-package lab3;
 /*   
  *  Name Block:
  *  Lab Number: Lab 3
@@ -7,13 +6,42 @@ package lab3;
  *  The purpose of this assignment is to demonstrate our understanding of polymorphism, encapsulation
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
-abstract class LinkNode extends Currency {
-	Currency data;
-	LinkNode next;
-	
-	private LinkNode(Currency data) {
-		this.data = data;
-		this.next = null;
-	}
-	
+
+public class LinkNode {
+ 
+ public int data;
+ public Dollar next;
+ 
+ public Dollar getData() {
+	return data;
+}
+
+public void setData(Dollar data) {
+	this.data = data;
+}
+
+public LinkNode getNext() {
+	return next;
+}
+
+public void setNext(LinkNode next) {
+	this.next = next;
+}
+
+
+ 
+ public LinkNode() {
+	 data = new Dollar();
+	 next = null;
+ }
+ 
+ public LinkNode(int notevalue, int coinvalue) {
+	 data = new Dollar(notevalue,coinvalue);
+	 next = null;
+ }
+ 
+ public LinkNode(LinkNode nd) {
+	 this.data = nd.data;
+	 this.next = nd.next;
+ }
 }
