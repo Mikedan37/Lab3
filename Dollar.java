@@ -1,63 +1,78 @@
 
 /*   
  *  Name Block:
- *  Lab Number: Lab 2
+ *  Lab Number: Lab 3
  *  Name: Michael Danylchuk, Maxim Manokhin
  *  Team: 1
  *  The purpose of this assignment is to demonstrate our understanding of polymorphism, encapsulation
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
 
-/*
- *  Things that were changed: Add, Subtract, IsGreater, IsEqual, method was removed an only in Currency class, 
- *  Creatend empty abstract Methods
- */
-
-public class Dollar extends Currency {
-// Non public String Attribute which contains name of Dollar 
-private String type = "Dollar";
-	
-	//Dont need pre or post documentation for constructors or destructors
-	public Dollar(double d) {
-	// Auto generated
-	}
+class Dollar extends Currency {
+	private String currencyName;
+	private String coinName;
 	
 	public Dollar() {
-	// Auto generated	
+		super();
+		this.currencyName = "Dollar";
+		this.coinName = "Cent";
 	}
 	
-	// String attribute method
-	public String getType() {
-		return type;
+	public Dollar(int noteValue,int coinValue) {
+		super(noteValue, coinValue);
+		this.currencyName = "Dollar";
+		this.coinName = "Cent";
 	}
 	
-	/*
-         * The purpose of this method is to print out the name and components of the currency
-         * Pre: No input
-         * Post: prints unit and fractional values of Dollar object and name dollar
-         */
-	
-	public void print() {
-		System.out.print(this.getUnit()+"."+this.getFraction()+" "+ type + " ");
+	@Override
+	public Currency add(Currency currency) {
+		Dollar other = (Dollar) currency;
+		int notes = super.getNoteValue() + other.getCoinValue();
+		int coins = super.getCoinValue() + other.getCoinValue();
+		if(coins >= 100) {
+			notes++ ;
+			coins -= 100;
+		}
+		return new Dollar(notes,coins);
 	}
-	
-	 @Override
-	protected lab2.Currency Currency(lab2.Currency x) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public Currency subtract(Currency currency) {
+		Dollar other = (Dollar) currency;
+		int notes = super.getNoteValue() - other.getNoteValue();
+		int coins = super.getCoinValue() - other.getNoteValue();
+		if(coins < 0) {
+			notes--;
+			coins += 100;
+		}
+		return new Dollar(noteValue,coinValue);
 	}
 
 	@Override
-	protected lab2.Currency Pound(lab2.Currency a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected lab2.Currency Dollar(lab2.Currency a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int compare(Currency currency) {
+		Dollar other = (Dollar) currency;
+		if(this.getNoteValue() > other.getNoteValue()) {
+			return 1;
+		}else if(this.getNoteValue() < other.getNoteValue()) {
+			return -1;
+		}else if(this.getCoinValue() > other.getCoinValue()) {
+			return 1;
+		}else if(this.getCoinValue() < other.getCoinValue()) {
+			return -1;
+		} else {
+			return 0;
+		}
 		
-	
+	}
+
+	@Override
+	public String printCurrency() {
+		String str = new String();
+		if(super.getCoinValue() > 10) {
+			str = super.getNoteValue() + " " + currencyName + " " + super.getCoinValue() + " " + coinName;
+		}else {
+			str = super.getNoteValue() + ".0" + currencyName + " " + super.getCoinValue() + " " + coinName;
+		}	
+	    return str;
+	}
+
 }
