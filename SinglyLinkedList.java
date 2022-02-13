@@ -1,89 +1,89 @@
-package lab3;
 /*   
  *  Name Block:
- *  Lab Number: Lab 2
+ *  Lab Number: Lab 3
  *  Name: Michael Danylchuk, Maxim Manokhin
  *  Team: 1
  *  The purpose of this assignment is to demonstrate our understanding of polymorphism, encapsulation
  *  and classes by creating a currency simulator that can add compare and manipulate objects
  */
-abstract class SinglyLinkedList{
-	private int count;
-	private LinkNode start = null;
-	private LinkNode end = null;
+
+public class SingleLinkedList extends LinkNode{
+	 private LinkNode head;
+	 private LinkNode end;
+	 int count;
 	
-	public LinkNode getStart() {
-		return start;
-	}
-	public void setStart(LinkNode start) {
-		this.start = start;
-	}
+	public void finalize() {}
 	
-	public LinkNode getEnd() {
-		return end;
-	}
-	public void setEnd(LinkNode end) {
-		this.end = end;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
+	public SingleLinkedList() {
+		head = end = null;
+		count = 0;
 	}
 	
-	public void addCurrency(Currency currency, int linkNodeValue) {
-		LinkNode newLinkNode = new LinkNode;
-		if(start == null) {
-			start = newLinkNode;
-			end = newLinkNode;
-		} else {
-			end.next = newLinkNode;
-			end = newLinkNode;
+	public SingleLinkedList(SingleLinkedList list){
+		this.head = list.head;
+		this.end = list.end;
+		this.count = list.count;
+	}
+	
+	public void add(LinkNode nd) {
+		if(head == null) {
+			head = end = nd;
+			return;
+		}
+		end.next = nd;
+		end = nd;
+		count++;
+	}
+	
+	public boolean find(LinkNode nd) {
+		LinkNode temp = head;
+		while(temp!=null) {
+			if(temp.data == nd.data) {
+				return true;
+			}
+			temp = temp.next;
+		}
+		return false;
+	}
+	
+	public void delete(LinkNode nd) {
+		if(find(nd)) {
+			LinkNode temp = head,prev = head;
+			if(head.data == nd.data) {
+				LinkNode tp = head;
+				head = head.next;
+				tp = null;
+				count--;
+				return;
+			}
+		while(temp!=null){
+			if(temp.data == nd.data) {
+				prev.next = temp.next;
+				 if(temp==end)
+					 end = prev;
+					 temp = null;
+					 count --;
+					 return;	 
+			}
+			prev = temp;
+			temp = temp.next;
+		  }
+	    }
+		else {
+			System.out.println("The node was not found in the list");
 		}
 	}
 	
-	public void removeCurrency(Currency currency) {
-		if(start != null) {
-			end = null;
-		    end = end(currency,count -1);
-		    start = end(currency, count -1);
-		}else {
-			System.out.println("Doesnt work list is empty");
-		}
-	}
-	
-	public void removeCurrency(int linkNodeValue) {
-		
-	}
-	
-	public void findCurrency(Currency currency) {
-		return nodeIndexOfcurrency;
-	}
-	
-	public void getCurrency(int indexvalue){
-		return currency;
-	}
-	
-	public String printList() {
-		return CurrencyObjectsInOrder;
-	}
-	
-	public Boolean isListEmpty(){
-		return true;
-	}
-	
-	public int countCurrency(){
-	    int count = 0;
-		LinkNode current = start;
-		while(current != null) {
-			count++;
-			current = current.LinkNode;
-		}
+	public int length() {
 		return count;
 	}
 	
-	// any other usefull methods
-	
-	
+	public void display() {
+		LinkNode temp = head;
+		while(temp!=null) {
+			System.out.println(temp.data.printCurrency());
+			temp = temp.next;
+		}
+	}
 }
+
